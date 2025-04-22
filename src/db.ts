@@ -1,7 +1,9 @@
 import { Sequelize } from "sequelize";
 import {
+  databaseHost,
   databaseNameENV,
   databasePassword,
+  databasePort,
   databaseUsernameENV,
 } from "./utils/envValue";
 const sequelize = new Sequelize(
@@ -9,7 +11,8 @@ const sequelize = new Sequelize(
   String(databaseUsernameENV),
   String(databasePassword),
   {
-    host: "localhost",
+    host: String(databaseHost),
+    port: Number(databasePort),
     dialect: "mysql",
   }
 );

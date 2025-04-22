@@ -7,3 +7,5 @@ export const secretSessionEnv = process.env.SESSION_SECRET;
 export const databaseNameENV = process.env.DATABASE_NAME;
 export const databaseUsernameENV = process.env.DATABSE_USERNAME;
 export const databasePassword = process.env.DATABASE_PASSWORD;
+export const databaseHost = process.env.DATABASE_HOST;
+export const databasePort = process.env.DATABASE_PORT;
