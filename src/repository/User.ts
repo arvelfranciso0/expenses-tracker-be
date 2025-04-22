@@ -1,8 +1,10 @@
 import { where } from "sequelize";
 import { UserAttributes } from "../interface/User";
 import { User } from "../model/User";
+import { hashPassword } from "../utils/hashUtils";
 
 export const SaveUser = async (user: UserAttributes) => {
+  user.password = await hashPassword(String(user.password));
   return await User.create(user);
 };
 

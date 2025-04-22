@@ -15,8 +15,10 @@ export const getAllExpenseByUserIDService = async (
   res: Response
 ) => {
   const budgetId = req.params.budgetId;
-
   const userExpensesData = await getALLExpensesByBudgetId(String(budgetId));
+  if (!userExpensesData) {
+    return res.status(404).send({ message: "Expenses not found." });
+  }
   const formatData = userExpensesData.map((expense) => ({
     ...expense,
     createdAt: expense?.createdAt?.toLocaleDateString(),

@@ -3,6 +3,7 @@ import { authMiddleware } from "../middleware/authMiddleware";
 import {
   addBudgetService,
   getAllBudgetByUserIDService,
+  getBudgetByDateService,
   getBudgetByIdService,
   getBudgetRemaining,
 } from "../service/budgetService";
@@ -36,5 +37,13 @@ budgetRoutes.get(
   authMiddleware,
   (req: Request, res: Response) => {
     getBudgetByIdService(req, res);
+  }
+);
+
+budgetRoutes.post(
+  path + "/get-budget-date",
+  authMiddleware,
+  (req: Request, res: Response) => {
+    getBudgetByDateService(req, res);
   }
 );
