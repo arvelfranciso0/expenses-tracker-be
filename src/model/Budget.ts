@@ -25,6 +25,10 @@ export const Budget = sequelize.define<
   endDate: {
     type: DataTypes.TEXT,
   },
+  status_flag: {
+    type: DataTypes.TINYINT,
+    defaultValue: 0,
+  },
   userId: {
     type: DataTypes.INTEGER,
     allowNull: false,

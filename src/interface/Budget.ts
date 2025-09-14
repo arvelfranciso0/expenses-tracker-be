@@ -4,5 +4,6 @@ export interface BudgetAttributes {
   budgetType: string;
   startDate: string;
   endDate: string;
+  status_flag: number;
   userId?: string;
 }

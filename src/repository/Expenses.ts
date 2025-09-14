@@ -1,3 +1,4 @@
+import { Op, WhereOptions } from "sequelize";
 import { ExpensesArray } from "../interface/request/expensesRequestInterface";
 import { Expenses } from "../model/Expeneses";
 
@@ -5,7 +6,10 @@ export const addExpenses = async (expenses: ExpensesArray) => {
   return await Expenses.bulkCreate(expenses);
 };
 
-export const getALLExpensesByBudgetId = async (budgetId: string) => {
+export const getALLExpensesByBudgetId = async (
+  budgetId: string,
+  endDate: Date
+) => {
   const expenses = await Expenses.findAll({
     where: {
       budgetId: budgetId,

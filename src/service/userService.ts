@@ -13,6 +13,13 @@ export const getUserByIdService = async (req: Request, res: Response) => {
 
   const user = (await getUserByID(String(userId))) as UserAttributes;
 
+  user.createdAt = user.createdAt
+    ? new Date(user.createdAt).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : "N/A";
   return res.status(200).send(user);
 };
 
