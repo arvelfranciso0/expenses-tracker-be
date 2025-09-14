@@ -14,8 +14,8 @@ expensesRoutes.post(
     expensesService(req, res);
   }
 );
-expensesRoutes.get(
-  path + "/get-expenses/:budgetId",
+expensesRoutes.post(
+  path + "/get-expenses",
   authMiddleware,
   (req: Request, res: Response) => {
     getAllExpenseByUserIDService(req, res);

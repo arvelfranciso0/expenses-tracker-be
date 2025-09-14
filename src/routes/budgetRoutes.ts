@@ -25,7 +25,7 @@ budgetRoutes.get(
     getAllBudgetByUserIDService(req, res);
   }
 );
-budgetRoutes.post(
+budgetRoutes.get(
   path + "/get-budget",
   authMiddleware,
   (req: Request, res: Response) => {

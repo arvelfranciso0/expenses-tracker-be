@@ -3,4 +3,5 @@ export interface ExpenesesAttributes {
   amount: string;
   expensesType: string;
   budgetId?: string;
+  createdAt?: Date;
 }

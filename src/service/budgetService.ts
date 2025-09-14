@@ -85,9 +85,21 @@ export const getBudgetByDateService = async (req: Request, res: Response) => {
 export const getBudgetRemaining = async (req: Request, res: Response) => {
   try {
     const userId = req.session.userId;
-    const { currentDate } = req.body;
-    const budget = await getBudgetByUserId(userId, currentDate);
-    console.log("budget", budget);
+    // const { currentDate } = req.body;
+    // const date = new Date(currentDate);
+    // const options: Intl.DateTimeFormatOptions = {
+    //   year: "numeric",
+    //   month: "long",
+    //   day: "numeric",
+    // };
+
+    // const formattedDate: string = date.toLocaleDateString("en-US", options);
+
+    const budget = await getBudgetByUserId(userId);
+    // const dateStatus =
+    //   new Date(budget.startDate) <= new Date(formattedDate) &&
+    //   new Date(budget.endDate) >= new Date(formattedDate);
+
     if (!budget) {
       return res.status(200).send({
         remaining: 0,
@@ -102,11 +114,12 @@ export const getBudgetRemaining = async (req: Request, res: Response) => {
         totalExpenses: 0,
       });
     }
+
     const totalExpenses = await getExpensesSumByBudgetId(String(budget.id));
     const remaining = totalExpenses
       ? Number(budget.amount) - totalExpenses
       : Number(budget.amount);
-
+    console.log("Total Expenses", totalExpenses);
     return res.status(200).send({
       remaining: remaining.toFixed(2),
       budget,

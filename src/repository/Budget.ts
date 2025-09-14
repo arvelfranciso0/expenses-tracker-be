@@ -47,19 +47,17 @@ export const getBudgetByDate = async (userId: string, currentDate: string) => {
   return budget as unknown as BudgetAttributes;
 };
 
-export const getBudgetByUserId = async (
-  userId: string,
-  currentDate: string
-) => {
+export const getBudgetByUserId = async (userId: string) => {
   const budget = await Budget.findOne({
     where: {
       userId: userId,
-      startDate: {
-        [Op.lte]: currentDate,
-      },
-      endDate: {
-        [Op.gte]: currentDate,
-      },
+      status_flag: 1,
+      // startDate: {
+      //   [Op.lte]: formattedDate,
+      // },
+      // endDate: {
+      //   [Op.gte]: formattedDate,
+      // },
     },
     raw: true,
   });

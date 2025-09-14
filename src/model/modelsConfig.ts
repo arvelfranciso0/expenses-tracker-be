@@ -19,7 +19,7 @@ const db = {
 };
 
 export const insertDefaultUser = async () => {
-  const password = await hashPassword("d");
+  const password = await hashPassword("@Rvel123");
 
   const defaultUser = {
     name: "default",
