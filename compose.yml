@@ -15,14 +15,15 @@ services:
       - .env.local
     depends_on:
       - db
+    command: ["/usr/src/app/wait-for.sh", "db:3306", "--", "npm", "run", "dev"]
 
   db:
     image: mysql:8
     container_name: mysql_db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: ""
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes" # allow empty password for dev
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: expensestracker
     ports:
       - "3306:3306"
