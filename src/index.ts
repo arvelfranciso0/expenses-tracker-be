@@ -7,7 +7,7 @@ import db, { insertDefaultUser } from "./model/modelsConfig";
 import { Sequelize } from "sequelize";
 import { routes } from "./routes/routesConfig";
 import session from "express-session";
-import { secretSessionEnv } from "./utils/envValue";
+import { databaseHost, secretSessionEnv } from "./utils/envValue";
 
 dotenv.config();
 
