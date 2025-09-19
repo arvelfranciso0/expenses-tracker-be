@@ -2,11 +2,7 @@ import { DataTypes, Model, Optional } from "sequelize";
 import sequelize from "../db";
 import { BudgetAttributes } from "../interface/Budget";
 
-export interface BudgetCreationAttributes
-  extends Optional<BudgetAttributes, "id"> {}
-export const Budget = sequelize.define<
-  Model<BudgetAttributes, BudgetCreationAttributes>
->("budgets", {
+export const Budget = sequelize.define<Model<BudgetAttributes>>("budgets", {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,

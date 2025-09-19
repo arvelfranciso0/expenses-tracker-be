@@ -15,11 +15,12 @@ export const getAllExpenseByUserIDService = async (
   res: Response
 ) => {
   // const budgetId = req.params.budgetId;
-  const { budgetId, endDate } = req.body;
+  const { budgetId, endDate, startDate } = req.body;
 
   const userExpensesData = await getALLExpensesByBudgetId(
     String(budgetId),
-    endDate
+    endDate,
+    startDate
   );
   if (!userExpensesData) {
     return res.status(404).send({ message: "Expenses not found." });

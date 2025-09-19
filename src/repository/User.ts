@@ -29,13 +29,9 @@ export const getUserByID = async (
 };
 
 export const updateUser = async (user: UserAttributes) => {
-  const { email, password, name, id } = user;
-  return await User.update(
-    { email, password, name },
-    {
-      where: {
-        id,
-      },
-    }
-  );
+  const { email, name, id, address, phone_number } = user;
+
+  await User.update({ email, name, address, phone_number }, { where: { id } });
+
+  return await User.findByPk(id);
 };

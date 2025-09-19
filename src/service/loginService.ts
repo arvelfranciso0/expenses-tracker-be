@@ -12,11 +12,11 @@ export const loginService = async (req: Request, res: Response) => {
 
   // return res.status(200).send(user);
   if (!user) {
-    return res.status(400).json({ message: "User email not found" });
+    return res.status(404).json({ message: "User email not found" });
   }
   const isMatch = await comparePassword(password, String(user.password));
   if (!isMatch) {
-    return res.status(400).json({ message: "Password not match." });
+    return res.status(401).json({ message: "Password not match." });
   }
   const token = generateAccessToken(user);
   console.log("User login successfully", user);

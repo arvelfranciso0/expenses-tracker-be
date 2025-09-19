@@ -8,11 +8,15 @@ export const addExpenses = async (expenses: ExpensesArray) => {
 
 export const getALLExpensesByBudgetId = async (
   budgetId: string,
-  endDate: Date
+  endDate: Date,
+  startDate: Date
 ) => {
   const expenses = await Expenses.findAll({
     where: {
       budgetId: budgetId,
+      createdAt: {
+        [Op.between]: [startDate, endDate],
+      },
     },
     raw: true,
   });

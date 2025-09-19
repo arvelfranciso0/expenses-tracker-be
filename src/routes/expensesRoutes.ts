@@ -5,7 +5,6 @@ import {
   getAllExpenseByUserIDService,
 } from "../service/expensesService";
 export const expensesRoutes = Router();
-
 const path = "/expenses";
 expensesRoutes.post(
   path + "/add",

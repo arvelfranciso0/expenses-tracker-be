@@ -55,7 +55,7 @@ export const getAllBudgetByUserIDService = async (
 
     return res.status(200).send({ totalAmount, data: userBudgetData });
   } catch (error: any) {
-    return res.status(500).send({ message: error?.message || "Server error" });
+    return res.status(400).send({ message: error?.message || "Server error" });
   }
 };
 
@@ -85,6 +85,7 @@ export const getBudgetByDateService = async (req: Request, res: Response) => {
 export const getBudgetRemaining = async (req: Request, res: Response) => {
   try {
     const userId = req.session.userId;
+    const { budgetId } = req.params;
     // const { currentDate } = req.body;
     // const date = new Date(currentDate);
     // const options: Intl.DateTimeFormatOptions = {
@@ -93,9 +94,11 @@ export const getBudgetRemaining = async (req: Request, res: Response) => {
     //   day: "numeric",
     // };
 
+    console.log("budgetId", budgetId);
+
     // const formattedDate: string = date.toLocaleDateString("en-US", options);
 
-    const budget = await getBudgetByUserId(userId);
+    const budget = await getBudgetByUserId(userId, Number(budgetId));
     // const dateStatus =
     //   new Date(budget.startDate) <= new Date(formattedDate) &&
     //   new Date(budget.endDate) >= new Date(formattedDate);

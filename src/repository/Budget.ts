@@ -13,6 +13,7 @@ export const getAllBudgetsByUserId = async (userId: string) => {
     where: {
       userId: userId,
     },
+    order: [["status_flag", "DESC"]],
     raw: true,
   });
 
@@ -47,11 +48,11 @@ export const getBudgetByDate = async (userId: string, currentDate: string) => {
   return budget as unknown as BudgetAttributes;
 };
 
-export const getBudgetByUserId = async (userId: string) => {
+export const getBudgetByUserId = async (userId: string, budgetId: number) => {
   const budget = await Budget.findOne({
     where: {
       userId: userId,
-      status_flag: 1,
+      id: budgetId,
       // startDate: {
       //   [Op.lte]: formattedDate,
       // },
