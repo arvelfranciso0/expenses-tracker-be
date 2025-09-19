@@ -3,11 +3,7 @@ import sequelize from "../db";
 import { UserAttributes } from "../interface/User";
 // import { Expenses } from "./Expeneses";
 
-export interface UserCreationAttributes
-  extends Optional<UserAttributes, "id"> {}
-export const User = sequelize.define<
-  Model<UserAttributes, UserCreationAttributes>
->("users", {
+export const User = sequelize.define<Model<UserAttributes>>("users", {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -15,7 +11,7 @@ export const User = sequelize.define<
   },
   name: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   password: {
     type: DataTypes.TEXT,
@@ -24,5 +20,13 @@ export const User = sequelize.define<
     type: DataTypes.STRING,
     allowNull: false,
     unique: true,
+  },
+  address: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  phone_number: {
+    type: DataTypes.STRING,
+    allowNull: true,
   },
 });

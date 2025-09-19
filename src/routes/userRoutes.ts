@@ -7,7 +7,6 @@ import {
 
 export const userRoutes = Router();
 const path = "/user";
-
 userRoutes.get(
   path + "/get-user",
   authMiddleware,
@@ -18,7 +17,7 @@ userRoutes.get(
 userRoutes.get(path + "/get-user", (req: Request, res: Response) =>
   authMiddleware(req, res, () => getUserByIdService)
 );
-userRoutes.get(
+userRoutes.post(
   path + "/update-user",
   authMiddleware,
   (req: Request, res: Response) => {
