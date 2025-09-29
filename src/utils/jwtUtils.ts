@@ -3,7 +3,7 @@ import { jwtEnv } from "./envValue";
 import { UserAttributes } from "../interface/User";
 
 export const generateAccessToken = (paylaod: object): string => {
-  const expiresIn = Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 7;
+  const expiresIn = Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 1;
   return jwt.sign(paylaod, String(jwtEnv), { expiresIn });
 };
 export const verifyToken = (token: string) => {

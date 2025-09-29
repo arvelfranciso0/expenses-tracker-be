@@ -1,3 +1,5 @@
+import { ExpenesesAttributes } from "./Expenses";
+
 export interface BudgetAttributes {
   id?: number;
   amount: string;
@@ -6,4 +8,8 @@ export interface BudgetAttributes {
   endDate: string;
   status_flag: number;
   userId?: string;
+}
+
+export interface BudgetExpensesInterface extends BudgetAttributes {
+  expenses: ExpenesesAttributes[];
 }

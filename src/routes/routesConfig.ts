@@ -1,6 +1,6 @@
 import { budgetRoutes } from "./budgetRoutes";
 import { expensesRoutes } from "./expensesRoutes";
-import { login } from "./loginRoutes";
+import { auth } from "./authRoutes";
 import { userRoutes } from "./userRoutes";
 
-export const routes = [login, expensesRoutes, userRoutes, budgetRoutes];
+export const routes = [auth, expensesRoutes, userRoutes, budgetRoutes];

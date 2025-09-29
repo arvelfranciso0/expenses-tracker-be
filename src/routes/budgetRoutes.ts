@@ -5,6 +5,7 @@ import {
   getAllBudgetByUserIDService,
   getBudgetByDateService,
   getBudgetByIdService,
+  getBudgetExpenses,
   getBudgetRemaining,
 } from "../service/budgetService";
 
@@ -45,5 +46,13 @@ budgetRoutes.post(
   authMiddleware,
   (req: Request, res: Response) => {
     getBudgetByDateService(req, res);
+  }
+);
+
+budgetRoutes.post(
+  path + "/get-budget-expenses",
+  authMiddleware,
+  (req: Request, res: Response) => {
+    getBudgetExpenses(req, res);
   }
 );

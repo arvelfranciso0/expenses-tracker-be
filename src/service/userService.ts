@@ -1,12 +1,6 @@
 import { Request, Response } from "express";
-import {
-  getUserByEmail,
-  getUserByID,
-  SaveUser,
-  updateUser,
-} from "../repository/User";
+import { getUserByID, updateUser } from "../repository/User";
 import { UserAttributes } from "../interface/User";
-import { hashPassword } from "../utils/hashUtils";
 
 export const getUserByIdService = async (req: Request, res: Response) => {
   const userId = req.session.userId;
@@ -45,16 +39,4 @@ export const updateUserInformation = async (req: Request, res: Response) => {
   } else {
     return res.status(404).json({ message: "User not found" });
   }
-};
-
-export const addUser = async (req: Request, res: Response) => {
-  const user = req.body as UserAttributes;
-
-  const existingUser = await getUserByEmail(user.email);
-
-  if (existingUser) {
-    return res.status(409).json({ message: "Email is already been used" });
-  }
-  await SaveUser(user);
-  return res.status(200).json({ message: "Signup succesffully" });
 };

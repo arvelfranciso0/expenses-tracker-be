@@ -35,3 +35,7 @@ export const updateUser = async (user: UserAttributes) => {
 
   return await User.findByPk(id);
 };
+
+export const updateUserVerified = async (email: string) => {
+  await User.update({ isVerified: true }, { where: { email: email } });
+};

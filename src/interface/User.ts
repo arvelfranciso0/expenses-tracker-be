@@ -6,6 +6,7 @@ export interface UserAttributes {
   address?: string;
   phone_number?: string;
   createdAt?: string;
+  isVerified?: boolean;
 }
 
 export interface UserAuth {

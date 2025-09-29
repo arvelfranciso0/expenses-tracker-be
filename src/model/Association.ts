@@ -20,7 +20,7 @@ export const Associations = () => {
   });
   Expenses.belongsTo(Budget, {
     foreignKey: "budgetId",
-    as: "budget",
+    as: "budgets",
     onDelete: "CASCADE",
   });
 };

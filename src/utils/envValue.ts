@@ -9,3 +9,5 @@ export const databaseUsernameENV = process.env.DATABASE_USERNAME;
 export const databasePassword = process.env.DATABASE_PASSWORD;
 export const databaseHost = process.env.DATABASE_HOST;
 export const databasePort = process.env.DATABASE_PORT;
+export const emailuser = process.env.EMAIL_USER;
+export const emailpass = process.env.EMAIL_PASSWORD;

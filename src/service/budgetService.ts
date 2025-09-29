@@ -2,27 +2,19 @@ import { Request, Response } from "express";
 import { BudgetRequestInterface } from "../interface/request/budgetRequestInterface";
 import {
   addBudget,
+  budgetExpenses,
   getAllBudgetsByUserId,
   getBudgetByDate,
   getBudgetById,
   getBudgetByUserId,
 } from "../repository/Budget";
 import { getExpensesSumByBudgetId } from "../repository/Expenses";
+import { BudgetExpensesInterface } from "../interface/Budget";
 
 export const addBudgetService = async (req: Request, res: Response) => {
   const budget = req.body as BudgetRequestInterface;
 
   const userId = req.session.userId;
-  budget.startDate = new Date(budget.startDate).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-  budget.endDate = new Date(budget.endDate).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
   const budgetWithUserId = {
     ...budget,
     userId: userId,
@@ -122,10 +114,51 @@ export const getBudgetRemaining = async (req: Request, res: Response) => {
     const remaining = totalExpenses
       ? Number(budget.amount) - totalExpenses
       : Number(budget.amount);
-    console.log("Total Expenses", totalExpenses);
     return res.status(200).send({
       remaining: remaining.toFixed(2),
       budget,
+      totalExpenses: totalExpenses ? totalExpenses.toFixed(2) : 0,
+    });
+  } catch (error: any) {
+    return res.status(500).send({ message: error?.message || "Server error" });
+  }
+};
+
+export const getBudgetExpenses = async (req: Request, res: Response) => {
+  try {
+    const userId = req.session.userId;
+    const { budgetId, endDate, startDate } = req.body;
+
+    const data = (await budgetExpenses(
+      userId,
+      budgetId,
+      endDate,
+      startDate
+    )) as BudgetExpensesInterface;
+
+    console.log("Data", data);
+
+    if (!data) {
+      return res.status(200).send({
+        remaining: 0,
+        id: null,
+        amount: 0,
+        budgetType: 0,
+        startDate: 0,
+        endDate: 0,
+        userId: userId,
+        totalExpenses: 0,
+        expenses: [],
+      });
+    }
+    const totalExpenses = await getExpensesSumByBudgetId(String(data.id));
+    const remaining = totalExpenses
+      ? Number(data.amount) - totalExpenses
+      : Number(data.amount);
+
+    return res.status(200).send({
+      remaining: remaining.toFixed(2),
+      budget_expenses: data,
       totalExpenses: totalExpenses ? totalExpenses.toFixed(2) : 0,
     });
   } catch (error: any) {

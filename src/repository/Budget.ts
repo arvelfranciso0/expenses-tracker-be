@@ -1,6 +1,7 @@
 import { Op } from "sequelize";
 import { BudgetAttributes } from "../interface/Budget";
 import { BudgetRequestInterface } from "../interface/request/budgetRequestInterface";
+import { BudgetExpensesInterface } from "../interface/Budget";
 import { Budget } from "../model/Budget";
 import { Expenses } from "../model/Expeneses";
 
@@ -64,4 +65,36 @@ export const getBudgetByUserId = async (userId: string, budgetId: number) => {
   });
 
   return budget as unknown as BudgetAttributes;
+};
+
+export const budgetExpenses = async (
+  userId: string,
+  budgetId: string,
+  endDate?: Date,
+  startDate?: Date
+) => {
+  const budget_expenses = await Budget.findOne({
+    include: [
+      {
+        model: Expenses,
+        as: "expenses",
+        required: false,
+        where:
+          startDate && endDate
+            ? {
+                budgetId: budgetId,
+                createdAt: {
+                  [Op.between]: [startDate, endDate],
+                },
+              }
+            : undefined,
+      },
+    ],
+    where: {
+      userId,
+      id: budgetId,
+    },
+  });
+
+  return budget_expenses as unknown as BudgetExpensesInterface;
 };

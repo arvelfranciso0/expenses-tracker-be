@@ -29,4 +29,8 @@ export const User = sequelize.define<Model<UserAttributes>>("users", {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  isVerified: {
+    type: DataTypes.BOOLEAN,
+    allowNull: true,
+  },
 });
