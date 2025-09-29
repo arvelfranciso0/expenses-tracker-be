@@ -10,6 +10,7 @@ import { comparePassword } from "../utils/hashUtils";
 import { generateAccessToken, verifyToken } from "../utils/jwtUtils";
 import { sendVerificationEmail } from "../utils/emailUtils";
 import { checkToken, deleteToken, SaveToken } from "../repository/Token";
+import { feurl } from "../utils/envValue";
 
 export const loginService = async (req: Request, res: Response) => {
   const { email, password } = req.body as LoginRequestInterface;
@@ -79,7 +80,7 @@ export const signUpUser = async (req: Request, res: Response) => {
     email: user.email,
   };
   await SaveToken(payload);
-  const link = `http://localhost:5173/verify?token=${token}`;
+  const link = `${feurl}/verify?token=${token}`;
   await sendVerificationEmail(user.email, link);
   await SaveUser(user);
   return res.status(200).json({ message: "Signup succesffully" });

@@ -11,3 +11,4 @@ export const databaseHost = process.env.DATABASE_HOST;
 export const databasePort = process.env.DATABASE_PORT;
 export const emailuser = process.env.EMAIL_USER;
 export const emailpass = process.env.EMAIL_PASSWORD;
+export const feurl = process.env.FE_URL;
