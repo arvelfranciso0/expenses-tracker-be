@@ -39,7 +39,11 @@ app.use(
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://192.168.1.101:5173"],
+    origin: [
+      "http://localhost:5173",
+      "http://192.168.1.101:5173",
+      "https://expenses-a-tracker.netlify.app",
+    ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
